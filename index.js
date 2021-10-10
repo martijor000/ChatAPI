@@ -12,9 +12,9 @@ app.use(express.json());
 app.use(morgan('combined'));
 
 // I want to have channel be the default
-app.use('/channel', rootRoutes);
+app.use('/', rootRoutes);
 // I want to be able to use the ID tag for channel and try to update the URL based on the channel they selected
-app.use('/channel', apiRoutes);
+app.use('/user', apiRoutes);
 
 var server = app.listen(3000, function () {
 
