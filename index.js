@@ -1,34 +1,20 @@
-// import dependencies
 var express = require("express");
 var app = express();
-var apiRoutes = require('./routes/api');
-var rootRoutes = require('./routes/root');
+var apiRoutes = require('./routes/messages');
+var rootRoutes = require('./routes/channels');
 var morgan = require('morgan');
-
-// setup our app (server/middleware)
 
 app.use(express.urlencoded({
     extended: true
 }));
 
 app.use(express.json());
-
 app.use(morgan('combined'));
 
-// // middleware function for logging access
-// function logAccess(req,res,next){
-//     console.log(req.method, req.originalUrl);
-//     next();
-// }
-
-// //logAcess(req, res, next)
-// app.use(logAccess);
-
-// add some endpoints (commands)
-app.use('/api', apiRoutes);
-app.use('/', rootRoutes);
-
-// serve out our app
+// I want to have channel be the default
+app.use('/channel', rootRoutes);
+// I want to be able to use the ID tag for channel and try to update the URL based on the channel they selected
+app.use('/channel', apiRoutes);
 
 var server = app.listen(3000, function () {
 

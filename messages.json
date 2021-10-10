@@ -1,0 +1,25 @@
+[{
+    "channel":"channel1",
+    "name" :"david",
+    "message": "Good Afternoon"
+},
+{
+    "channel":"channel1",
+    "name" :"david",
+    "message": "Good Noon"
+},
+{
+    "channel":"channel2",
+    "name" :"david",
+    "message": "Good Morning"
+},
+{
+    "channel":"channel2",
+    "name" :"david",
+    "message": "Good Goofball"
+},
+{
+    "channel":"channel3",
+    "name" :"david",
+    "message": "Good test"
+}]

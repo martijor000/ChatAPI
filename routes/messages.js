@@ -9,43 +9,15 @@ const { stringify } = require('querystring');
 
 //CRUD - Create, Read, Update, Delete
 
-//get all of a resource - Read
-router.get('/', function(req, res){
-    try
-    {
-        var rawdata =fs.readFileSync('data.json'); // <Buffer  <hex code> - Raw Data
-        var students = JSON.parse(rawdata);
-    
-        console.log(students);
-    
-        res.status(200).json(students);
-
-    } catch(err)
-    {
-        res.status(500).json({message: err.message});
-    }
-
-
-
-});
-
 // Create a resource - Create
-router.post('/', function(req, res){
+router.post('/:id', function(req, res){
     try{
         console.log("Posted Object is: ", req.body);
-        // Open the file
-        const rawdata = fs.readFileSync('data.json');
-        // Decode the file (parse) so we can use it
-        var students = JSON.parse(rawdata);
-        
-        // Add our new object to the array
+        const rawdata = fs.readFileSync('');
+        var channelData = JSON.parse(rawdata);
         students.push(req.body);
-
-        // Save (write) the daya back to the file
-        const data = fs.writeFileSync('data.json', JSON.stringify(students));    
-        
-        // Return data to the user
-        res.status(200).json(students);
+        const data = fs.writeFileSync('messages.json', JSON.stringify(channelData));    
+        res.status(200).json(channelData);
 
     }catch(err){
         res.status(500).json({message: err.message});
@@ -53,6 +25,22 @@ router.post('/', function(req, res){
     // res.status(201).json({message: "success creating resource"});
 
 });
+
+//get all of a resource - Read
+router.get('/:id', function(req, res){
+    try
+    {
+        var rawdata =fs.readFileSync('messages.json'); // <Buffer  <hex code> - Raw Data
+        var messagesData = JSON.parse(rawdata);
+        console.log(messagesData);
+        res.status(200).json(messagesData);
+    } catch(err)
+    {
+        res.status(500).json({message: err.message});
+    }
+});
+
+
 
 //Updated a resource - Update
 router.patch('/:id', function(req,res){
