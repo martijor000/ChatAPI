@@ -60,7 +60,7 @@ router.get('/', function(req, res){
 
 
 //Updated a resource - Update
-router.patch('/:id', function(req,res){
+router.patch('/user/:id', function(req,res){
     try{
         console.log("Posted Object is: ",req.params.id, req.body);
         const rawdata = fs.readFileSync('channels.json');
@@ -90,21 +90,15 @@ router.patch('/:id', function(req,res){
 })
 
 //delete a resource - Delete
-router.delete('/:id', function(req, res){
+router.delete('/user/:id', function(req, res){
     try{
         console.log("Posted Object is: ",req.params.id, req.body);
         const rawdata = fs.readFileSync('channels.json');
         var channelData = JSON.parse(rawdata);
+        var paramsId = req.params.id;
 
-        var id = req.params.id;
-        var rawBody = req.body;
-
-        channelData[id].channel = rawBody.channel.delete;
-        channelData[id].name = rawBody.name.delete;
-        channelData[id].message = rawBody.message.delete;
-        id.delete;
-        
-        const data = fs.writeFileSync('channels.json', JSON.stringify(channelData));    
+        const filtered = channelData.filter(channelData => channelData.id != paramsId);
+        const data = fs.writeFileSync('channels.json', JSON.stringify(filtered));    
         res.status(200).json(channelData);
 
     }catch(err){
